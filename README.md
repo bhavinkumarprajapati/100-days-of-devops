@@ -14,7 +14,7 @@ This repository documents my journey of completing **100 Days of DevOps**.
 | Day 01 | Linux User Setup with Non-Interactive Shell | ✅ |
 | Day 02 | Temporary User Setup with Expiry | ✅ |
 | Day 03 | Secure Root SSH Access | ✅ |
-| Day 04 | Script Execution Permissions |  |
+| Day 04 | Script Execution Permissions | ✅ |
 
 
 ---
