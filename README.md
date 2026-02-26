@@ -15,6 +15,9 @@ This repository documents my journey of completing **100 Days of DevOps**.
 | Day 02 | Temporary User Setup with Expiry | ✅ |
 | Day 03 | Secure Root SSH Access | ✅ |
 | Day 04 | Script Execution Permissions | ✅ |
+| Day 05 | SElinux Installation and Configuration | ✅ |
+| Day 06 | Create a Cron Job | ✅ |
+| Day 07 | Linux SSH Authentication | ✅ |
 
 
 ---
