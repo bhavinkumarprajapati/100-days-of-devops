@@ -18,8 +18,8 @@ This repository documents my journey of completing **100 Days of DevOps**.
 | Day 05 | SElinux Installation and Configuration | ✅ |
 | Day 06 | Create a Cron Job | ✅ |
 | Day 07 | Linux SSH Authentication | ✅ |
-
-
+| Day 08 | Install Ansible | ✅ |
+| Day 09 | MariaDB Troubleshooting | ✅ |
 ---
 
 ## 🛠️ Topics Covered
