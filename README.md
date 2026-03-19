@@ -20,6 +20,13 @@ This repository documents my journey of completing **100 Days of DevOps**.
 | Day 07 | Linux SSH Authentication | ✅ |
 | Day 08 | Install Ansible | ✅ |
 | Day 09 | MariaDB Troubleshooting | ✅ |
+| Day 10 | Linux Bash Scripts | ✅ |
+| Day 11 | Install and Configure Tomcat Server | ✅ |
+| Day 12 | Linux Network Services | ✅ |
+| Day 13 | IPtables Installation And Configuration | ✅ |
+
+
+
 ---
 
 ## 🛠️ Topics Covered
