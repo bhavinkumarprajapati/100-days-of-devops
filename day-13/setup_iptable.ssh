@@ -1,0 +1,68 @@
+#!/bin/bash
+# ============================================================
+# iptables Setup Script - Nautilus Stratos DC
+# Blocks port 5003 for everyone except LBR host (stlb01)
+# ============================================================
+
+set -e  # Exit on any error
+
+echo "============================================"
+echo " iptables Firewall Setup - $(hostname)"
+echo "============================================"
+
+# ── 1. Install iptables ──────────────────────────────────────
+echo "[1/5] Installing iptables and iptables-services..."
+sudo yum install -y iptables iptables-services
+echo "      ✅ Installed"
+
+# ── 2. Start & enable iptables service ──────────────────────
+echo "[2/5] Enabling iptables service..."
+sudo systemctl start iptables
+sudo systemctl enable iptables
+echo "      ✅ Service started and enabled"
+
+# ── 3. Resolve LBR IP ───────────────────────────────────────
+echo "[3/5] Resolving LBR host (stlb01)..."
+LBR_IP=$(getent hosts stlb01 | awk '{print $1}')
+
+if [ -z "$LBR_IP" ]; then
+  echo "      ❌ ERROR: Could not resolve stlb01. Aborting."
+  exit 1
+fi
+echo "      ✅ LBR IP resolved: $LBR_IP"
+
+# ── 4. Apply iptables rules ──────────────────────────────────
+echo "[4/5] Applying iptables rules..."
+
+# Remove any existing rules for port 5003 (clean slate)
+sudo iptables -D INPUT -p tcp --dport 5003 -j DROP 2>/dev/null || true
+sudo iptables -D INPUT -p tcp --dport 5003 -s "$LBR_IP" -j ACCEPT 2>/dev/null || true
+
+# Insert in correct order:
+# DROP first (will be pushed to position 2), then ACCEPT LBR (becomes position 1)
+sudo iptables -I INPUT -p tcp --dport 5003 -j DROP
+sudo iptables -I INPUT -p tcp --dport 5003 -s "$LBR_IP" -j ACCEPT
+
+echo "      ✅ Rules applied"
+
+# ── 5. Save rules for persistence ───────────────────────────
+echo "[5/5] Saving rules to persist after reboot..."
+sudo iptables-save | sudo tee /etc/sysconfig/iptables > /dev/null
+echo "      ✅ Rules saved to /etc/sysconfig/iptables"
+
+# ── Verification ─────────────────────────────────────────────
+echo ""
+echo "============================================"
+echo " Verification"
+echo "============================================"
+echo "Active rules for port 5003:"
+sudo iptables -L INPUT -v -n --line-numbers | grep -E "5003|num"
+
+echo ""
+echo "Saved rules for port 5003:"
+sudo grep "5003" /etc/sysconfig/iptables
+
+echo ""
+echo "============================================"
+echo " ✅ All done on $(hostname)!"
+echo "============================================"
