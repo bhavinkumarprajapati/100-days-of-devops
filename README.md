@@ -24,6 +24,9 @@ This repository documents my journey of completing **100 Days of DevOps**.
 | Day 11 | Install and Configure Tomcat Server | ✅ |
 | Day 12 | Linux Network Services | ✅ |
 | Day 13 | IPtables Installation And Configuration | ✅ |
+| Day 14 | Linux Process Troubleshooting | ✅ |
+| Day 15 | Setup SSL for Nginx | ✅ |
+| Day 16 | Install and Configure Nginx as an LBR | ✅ |
 
 
 
